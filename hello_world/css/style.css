@@ -1,0 +1,36 @@
+
+.header {
+    color: rgb(59, 38, 38);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.content {
+    color:rgb(46, 38, 38);
+    font-size: 50px;
+    background-color: antiquewhite;
+}
+
+.content:hover {
+    color:blue;
+    background-color: black;
+}
+
+.border-red {
+    border: 5px red solid;
+}
+
+a:link {
+    color: red;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: blue;
+}
+
+a:active {
+    color:yellow;
+}
