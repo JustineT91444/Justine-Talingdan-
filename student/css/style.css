@@ -1,0 +1,62 @@
+
+:root{
+  --bg: #f7f7f7;
+  --card: #ffffff;
+  --text: #222222;
+  --muted: #666666;
+  --accent: #1976d2;
+  --success: #4caf50;
+  --danger: #f44336;
+  --radius: 6px;
+  --max-width: 900px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding:24px;
+  display:flex;
+  justify-content:center;
+}
+
+.page{
+  width:100%;
+  max-width:var(--max-width);
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.08);
+}
+
+.page-title{margin:0 0 12px 0; font-size:18px}
+
+.controls{display:flex; gap:8px; align-items:center}
+.search-input{flex:1; padding:8px 10px; border:1px solid #ddd; border-radius:4px}
+.search-input:focus{outline:2px solid rgba(25,118,210,0.12)}
+
+.btn{padding:8px 12px; border-radius:4px; border:1px solid transparent; background:#eee; cursor:pointer}
+.btn-primary{background:var(--accent); color:#fff; border-color:var(--accent)}
+.btn-success{background:var(--success); color:#fff}
+.btn-danger{background:var(--danger); color:#fff}
+
+.toolbar{margin-top:12px; display:flex; gap:8px}
+
+.student-table{width:100%; margin-top:14px; border-collapse:collapse; border:1px solid #ddd}
+.student-table th, .student-table td{padding:10px; border-bottom:1px solid #eee; text-align:left; font-size:14px}
+.student-table thead th{background:#f1f1f1; font-weight:600}
+.student-table tbody tr:nth-child(even){background:#fafafa}
+
+.empty-message{color:var(--muted); text-align:center; padding:16px}
+
+.badge{display:inline-block; padding:4px 8px; border-radius:12px; font-size:12px; color:#fff}
+.badge.success{background:var(--success)}
+.badge.danger{background:var(--danger)}
+.badge.info{background:var(--accent)}
+
+@media (max-width:600px){
+  .controls{flex-direction:column; align-items:stretch}
+  .toolbar{flex-wrap:wrap}
+}
