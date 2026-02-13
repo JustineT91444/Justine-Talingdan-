@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Records</title>
+        <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="page">
+        <h2 class="page-title">Student Search</h2>
+
+        <div class="controls">
+            <input class="search-input" type="text" id="searchInput" placeholder="Enter student name">
+            <button class="btn btn-primary" onclick="searchStudent()">Search</button>
+        </div>
+
+        <div class="toolbar">
+            <button class="btn btn-success" onclick="showPresent()">Present</button>
+            <button class="btn btn-danger" onclick="showAbsent()">Absent</button>
+            <button class="btn btn-info" onclick="showPassed()">Passed</button>
+            <button class="btn btn-warning" onclick="showFailed()">Failed</button>
+        </div>
+
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Sub1</th>
+                    <th>Sub2</th>
+                    <th>Sub3</th>
+                    <th>Average</th>
+                    <th>Remarks</th>
+                    <th>Attendance</th>
+                </tr>
+            </thead>
+            <tbody id="searchResult">
+                <tr>
+                    <td class="empty-message" colspan="7">Search for a student...</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script src="./js/student.js"></script>
+    </div>
+</body>
+</html>
