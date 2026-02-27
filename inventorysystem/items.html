@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items - Inventory System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span>📦</span>
+            <h5>Inventory</h5>
+        </div>
+
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/><path d="M4 6l2-2h12l2 2M10 10v4M14 10v4"/></g></svg>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="items.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></g></svg>
+                    <span>Items</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="categories.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M12 3H7a2 2 0 0 0-2 2v3m0 0l3-3 3 3M5 8h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z"/></svg>
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="units.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2m0 0v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7"/></svg>
+                    <span>Units</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-bottom">
+            <a class="logout-btn" href="login.html">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1"/></svg>
+                <span>Logout</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="topbar">
+            <div class="breadcrumb-nav">
+                <a href="dashboard.html">Home</a>
+                <span>/</span>
+                <span>Items</span>
+            </div>
+            <div class="profile-dropdown">
+                <div class="profile-avatar" id="profileAvatar">U</div>
+                <div>
+                    <div style="font-size: 0.875rem; font-weight: 600;" id="profileName">User</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Items</h1>
+            <p style="color: var(--text-secondary); margin: 0;">Manage your inventory items, quantities, and details.</p>
+        </div>
+
+        <!-- Page Content -->
+        <div style="padding: 0 var(--spacing-xl) var(--spacing-xl);">
+            <!-- Search and Action Bar -->
+            <div style="display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                <div class="search-bar" style="flex: 1;">
+                        <input type="text" id="searchItems" class="form-control" placeholder="Search items by name, ID, or category...">
+                </div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                    Add Item
+                </button>
+            </div>
+
+            <!-- Items Table -->
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table" id="itemsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Unit</th>
+                                <th>Qty</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsTableBody">
+                            <tr>
+                                <td colspan="5" class="empty-state">
+                                    <div class="empty-state-icon">📦</div>
+                                    <div class="empty-state-title">No items yet</div>
+                                    <p style="margin: 0;">Click "Add Item" to start managing your inventory</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div class="modal fade" id="addItemModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addItemForm" onsubmit="handleAddItem(event)">
+                        <div class="form-group mb-3">
+                            <label for="itemName" class="form-label">Item Name</label>
+                            <input type="text" class="form-control" id="itemName" placeholder="Enter item name" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="itemCategory" class="form-label">Category</label>
+                            <select id="itemCategory" class="form-select" required>
+                                <option value="">-- select category --</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="itemUnit" class="form-label">Unit</label>
+                            <select id="itemUnit" class="form-select" required>
+                                <option value="">-- select unit --</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="itemQty" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="itemQty" placeholder="Enter quantity" min="0" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Add Item</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        let items = [];
+        let nextId = 1;
+        let editingItemId = null; // null when adding, holds id when editing
+        let categories = [];
+        let units = [];
+
+        function getCategoryName(catId) {
+            const cat = categories.find(c => c.id === Number(catId));
+            return cat ? cat.name : '-';
+        }
+        function getUnitName(unitId) {
+            const u = units.find(u => u.id === Number(unitId));
+            return u ? u.name : '-';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('username') || 'User';
+            const firstLetter = username.charAt(0).toUpperCase();
+            document.getElementById('profileName').textContent = username;
+            document.getElementById('profileAvatar').textContent = firstLetter;
+
+            // load supporting lists first (needed for item migration and select population)
+            categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            units = JSON.parse(localStorage.getItem('units') || '[]');
+            // fill selects
+            const catSelect = document.getElementById('itemCategory');
+            const unitSelect = document.getElementById('itemUnit');
+            if (catSelect) {
+                categories.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = c.name;
+                    catSelect.appendChild(opt);
+                });
+            }
+            if (unitSelect) {
+                units.forEach(u => {
+                    const opt = document.createElement('option');
+                    opt.value = u.id;
+                    opt.textContent = u.name;
+                    unitSelect.appendChild(opt);
+                });
+            }
+            loadItems();
+            const searchEl = document.getElementById('searchItems');
+            if (searchEl) {
+                searchEl.addEventListener('input', e => filterTableDebounced(e.target.value));
+            }
+        });
+
+        // record warnings or out‑of‑stock situations
+        function checkQtyWarning(item, prevQty) {
+            const q = Number(item.qty);
+            const name = item.name;
+            if (prevQty === undefined) {
+                if (q === 0) {
+                    addActivity('item-out-of-stock', `Item \"${name}\" is out of stock`);
+                } else if (q <= 5) {
+                    addActivity('item-low-stock', `Item \"${name}\" low quantity (${q})`);
+                }
+            } else {
+                const pq = Number(prevQty);
+                if (q === 0 && pq !== 0) {
+                    addActivity('item-out-of-stock', `Item \"${name}\" is out of stock`);
+                } else if (q <= 5 && pq > 5) {
+                    addActivity('item-low-stock', `Item \"${name}\" low quantity (${q})`);
+                } else if (q > 5 && pq <= 5) {
+                    addActivity('item-restocked', `Item \"${name}\" quantity now ${q}`);
+                }
+            }
+        }
+
+        function handleAddItem(e) {
+            e.preventDefault();
+            const name = document.getElementById('itemName').value;
+            const categoryId = Number(document.getElementById('itemCategory').value);
+            const unitId = Number(document.getElementById('itemUnit').value);
+            const qty = document.getElementById('itemQty').value;
+
+            if (editingItemId !== null) {
+                // update existing
+                const idx = items.findIndex(i => i.id === editingItemId);
+                if (idx !== -1) {
+                    const prevQty = items[idx].qty;
+                    items[idx].name = name;
+                    items[idx].categoryId = categoryId;
+                    items[idx].unitId = unitId;
+                    items[idx].qty = qty;
+                    saveItems();
+                    renderItems();
+                    addActivity('item-updated', `Updated item \"${name}\"`);
+                    checkQtyWarning(items[idx], prevQty);
+                    if (window.location.pathname.endsWith('dashboard.html')) {
+                        updateDashboardMetrics();
+                    }
+                    showToast('Item updated successfully!', 'success');
+                    // highlight updated row
+                    setTimeout(() => {
+                        const tr = document.querySelector(`#itemsTableBody tr[data-id=\"${editingItemId}\"]`);
+                        if (tr) flashElement(tr);
+                    }, 100);
+                }
+                editingItemId = null;
+            } else {
+                const item = {
+                    id: nextId++,
+                    name,
+                    categoryId,
+                    unitId,
+                    qty
+                };
+                items.push(item);
+                saveItems();
+                renderItems();
+                addActivity('item-added', `Added item \"${name}\"`);
+                checkQtyWarning(item);
+                if (window.location.pathname.endsWith('dashboard.html')) {
+                    updateDashboardMetrics();
+                }
+                showToast('Item added successfully!', 'success');
+                    // flash newly added row
+                    setTimeout(() => {
+                        const tr = document.querySelector(`#itemsTableBody tr[data-id=\"${item.id}\"]`);
+                        if (tr) flashElement(tr);
+                    }, 100);
+            }
+
+            document.getElementById('addItemForm').reset();
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addItemModal'));
+            modal.hide();
+            // reset modal title/button text
+            document.querySelector('#addItemModal .modal-title').textContent = 'Add New Item';
+            document.querySelector('#addItemForm button[type="submit"]').textContent = 'Add Item';
+        }
+
+        const filterTableDebounced = debounce(filterTable, 250);
+        function filterTable(searchTerm) {
+            const filtered = items.filter(item => {
+                const catName = getCategoryName(item.categoryId);
+                return (
+                    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    item.id.toString().includes(searchTerm) ||
+                    catName.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            });
+            renderItems(filtered);
+        }
+
+        function renderItems(itemsToShow = items) {
+            const tbody = document.getElementById('itemsTableBody');
+            
+            if (itemsToShow.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="empty-state">
+                            <div class="empty-state-icon">📦</div>
+                            <div class="empty-state-title">No items yet</div>
+                            <p style="margin: 0;">Click "Add Item" to start managing your inventory</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = itemsToShow.map(item => `
+                <tr data-id="${item.id}">
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${getCategoryName(item.categoryId)}</td>
+                    <td>${getUnitName(item.unitId)}</td>
+                    <td>${item.qty}</td>
+                    <td style="display: flex; gap: var(--spacing-sm);">
+                        <button class="btn btn-sm btn-warning" onclick="editItem(${item.id})">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteItem(${item.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function editItem(id) {
+            const item = items.find(i => i.id === id);
+            if (!item) return;
+            editingItemId = id;
+            document.getElementById('itemName').value = item.name;
+            document.getElementById('itemCategory').value = item.categoryId || '';
+            document.getElementById('itemUnit').value = item.unitId || '';
+            document.getElementById('itemQty').value = item.qty;
+            const modal = new bootstrap.Modal(document.getElementById('addItemModal'));
+            document.querySelector('#addItemModal .modal-title').textContent = 'Edit Item';
+            document.querySelector('#addItemForm button[type="submit"]').textContent = 'Save Changes';
+            modal.show();
+            // scroll row into view after modal opens
+            setTimeout(() => {
+                const tr = document.querySelector(`#itemsTableBody tr[data-id=\"${id}\"]`);
+                if (tr) tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        function deleteItem(id) {
+            const toDelete = items.find(i => i.id === id);
+            if (confirm('Are you sure you want to delete this item?')) {
+                items = items.filter(item => item.id !== id);
+                saveItems();
+                renderItems();
+                addActivity('item-deleted', `Deleted item \"${toDelete ? toDelete.name : id}\"`);
+                if (window.location.pathname.endsWith('dashboard.html')) {
+                    updateDashboardMetrics();
+                }
+                showToast('Item deleted successfully!', 'success');
+            }
+        }
+
+        function saveItems() {
+            localStorage.setItem('items', JSON.stringify(items));
+        }
+
+        function loadItems() {
+            const saved = localStorage.getItem('items');
+            if (saved) {
+                items = JSON.parse(saved);
+                // migrate old items lacking category/unit IDs
+                items.forEach(i => {
+                    if (i.categoryId === undefined) i.categoryId = categories.length ? categories[0].id : null;
+                    if (i.unitId === undefined) i.unitId = units.length ? units[0].id : null;
+                    // remove legacy fields
+                    if ('unit' in i) delete i.unit;
+                });
+                saveItems();
+                nextId = Math.max(...items.map(i => i.id), 0) + 1;
+                renderItems();
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
